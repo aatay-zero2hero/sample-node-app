@@ -56,7 +56,7 @@ pipeline {
           steps {
             withAWS(region: 'eu-west-2', credentials: 'afdb0fa4-bd8e-4f96-ba10-50d277e5b1d2') {
               s3Delete(bucket: 'zero2heros3bucket', path: '/sample-node-app/*')
-              s3Upload(bucket: 'zero2heros3bucket', workingDir: 'build', includePathPattern: '**/*')
+              s3Upload(bucket: 'zero2heros3bucket', workingDir: 'build', includePathPattern: '/sample-node-app/*', acl: '3dcedc9ae837287fa612a59c109597a0e390ccadcfd8216be754fc7e0afa5865')
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
