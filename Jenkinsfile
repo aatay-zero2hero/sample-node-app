@@ -44,7 +44,7 @@ pipeline {
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
             sh 'sh ./scripts/deliver-for-development.sh'
-            input message: 'Finished using the web site? (Click "Proceed" to continue)', ok: 'continue'
+            sleep time: 100, unit: 'SECONDS'
             sh 'sh ./scripts/kill.sh'
           }
         }
@@ -60,9 +60,7 @@ pipeline {
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
             sh 'sh ./scripts/deliver-for-development.sh'
-            timeout(time: 30, unit: 'SECONDS') {
-              input message "Finished using the web site? (Click "Proceed" to continue)"
-            }  
+            sleep time: 100, unit: 'SECONDS'
             sh 'sh ./scripts/kill.sh'
           }
         }
