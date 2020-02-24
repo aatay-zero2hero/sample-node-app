@@ -21,7 +21,7 @@
             parallel {
               stage('Run Tests') {
                 steps {
-                  sh './jenkins/scripts/test.sh'
+                  sh './scripts/test.sh'
                 }
               }
 
@@ -47,9 +47,9 @@
                   }
 
                   mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
-                  sh './jenkins/scripts/deliver-for-development.sh'
+                  sh './scripts/deliver-for-development.sh'
                   input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                  sh './jenkins/scripts/kill.sh'
+                  sh './scripts/kill.sh'
                 }
               }
 
@@ -64,9 +64,9 @@
                   }
 
                   mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
-                  sh './jenkins/scripts/deliver-for-development.sh'
+                  sh './scripts/deliver-for-development.sh'
                   input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                  sh './jenkins/scripts/kill.sh'
+                  sh './scripts/kill.sh'
                 }
               }
 
