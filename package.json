@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./index.js",
-    "build": "mkdir -p build && cp -R node_modules src build"
+    "build": "mkdir -p build && cp -R node_modules views routes public habitat app.js dev-config.json package.json build"
   },
   "dependencies": {
     "express": "~4.16.3",
