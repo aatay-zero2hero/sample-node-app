@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Run Tests') {
           steps {
-            sh 'scripts/test.sh'
+            sh '/scripts/test.sh'
           }
         }
 
@@ -43,9 +43,9 @@ pipeline {
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
-            sh 'scripts/deliver-for-development.sh'
+            sh '/scripts/deliver-for-development.sh'
             input 'Finished using the web site? (Click "Proceed" to continue)'
-            sh 'scripts/kill.sh'
+            sh '/scripts/kill.sh'
           }
         }
 
@@ -60,9 +60,9 @@ pipeline {
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
-            sh 'scripts/deliver-for-development.sh'
+            sh '/scripts/deliver-for-development.sh'
             input 'Finished using the web site? (Click "Proceed" to continue)'
-            sh 'scripts/kill.sh'
+            sh '/scripts/kill.sh'
           }
         }
 
