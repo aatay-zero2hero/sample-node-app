@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./index.js"
+    "build": "echo 'hello build'"
   },
   "dependencies": {
     "express": "~4.16.3",
