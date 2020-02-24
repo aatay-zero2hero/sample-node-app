@@ -17,7 +17,7 @@ pipeline {
       parallel {
         stage('Run Tests') {
           steps {
-            sh '/scripts/test.sh'
+            sh './scripts/test.sh'
           }
         }
 
