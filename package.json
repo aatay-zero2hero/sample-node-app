@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./index.js",
-    "build": "echo 'hello build'"
+    "build": "mkdir -p build && cp -R node_modules src build"
   },
   "dependencies": {
     "express": "~4.16.3",
