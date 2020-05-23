@@ -52,7 +52,6 @@ Next, let's change the version number:
 pkg_version="1.1.1"
 ...
 ```
-
 Save and close the file, then enter the Habitat Studio:
 
 ```
@@ -64,7 +63,6 @@ And run a build:
 ```
 [1][default:/src:0]# build
 ```
-
 Habitat will produce a package (a `.hart` file) and place it in the `results` directory.
 
 ### Running the Package with Docker
