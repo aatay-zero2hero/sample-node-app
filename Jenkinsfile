@@ -37,9 +37,9 @@ pipeline {
             branch 'staging'
           }
           steps {
-            withAWS(region: 'eu-west-2', credentials: 'afdb0fa4-bd8e-4f96-ba10-50d277e5b1d2') {
-              s3Delete(bucket: 'zero2heros3bucket', path: '**/*')
-              s3Upload(bucket: 'zero2heros3bucket', workingDir: 'build', includePathPattern: '**/*', acl:'BucketOwnerFullControl')
+            withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
+              s3Delete(bucket: 'zero2hero-s3-bucket', path: '**/*')
+              s3Upload(bucket: 'zero2hero-s3-bucket', workingDir: 'build', includePathPattern: '**/*', acl:'BucketOwnerFullControl')
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
@@ -54,8 +54,8 @@ pipeline {
             branch 'master'
           }
           steps {
-            withAWS(region: 'eu-west-2', credentials: 'afdb0fa4-bd8e-4f96-ba10-50d277e5b1d2') {
-              s3Delete(bucket: 'zero2heros3bucket', path: '/sample-node-app/*')
+            withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
+              s3Delete(bucket: 'zero2hero-s3-bucket', path: '/sample-node-app/*')
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
