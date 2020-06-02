@@ -37,7 +37,7 @@ pipeline {
             branch 'staging'
           }
           steps {
-            withAWS(region: 'eu-west-2', credentials: 'afdb0fa4-bd8e-4f96-ba10-50d277e5b1d2') {
+            withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
               s3Delete(bucket: 'zero2heros3bucket', path: '**/*')
               s3Upload(bucket: 'zero2heros3bucket', workingDir: 'build', includePathPattern: '**/*', acl:'BucketOwnerFullControl')
             }
@@ -54,7 +54,7 @@ pipeline {
             branch 'master'
           }
           steps {
-            withAWS(region: 'eu-west-2', credentials: 'afdb0fa4-bd8e-4f96-ba10-50d277e5b1d2') {
+            withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
               s3Delete(bucket: 'zero2heros3bucket', path: '/sample-node-app/*')
             }
 
