@@ -59,7 +59,7 @@ pipeline {
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
-            sh 'sh ./scripts/deliver-for-development.sh'
+            sh 'sh ./scripts/deploy-for-production.sh'
             sleep time: 100, unit: 'SECONDS'
             sh 'sh ./scripts/kill.sh'
           }
