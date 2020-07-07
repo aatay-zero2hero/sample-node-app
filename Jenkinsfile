@@ -38,8 +38,8 @@ pipeline {
           }
           steps {
             withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
-              s3Delete(bucket: 'zero2hero-s3-bucket', path: '**/*')
-              s3Upload(bucket: 'zero2hero-s3-bucket', workingDir: 'build', includePathPattern: '**/*', acl:'BucketOwnerFullControl')
+              s3Delete(bucket: 'zero2hero-s3-bucket2', path: '**/*')
+              s3Upload(bucket: 'zero2hero-s3-bucket2', workingDir: 'build', includePathPattern: '**/*', acl:'BucketOwnerFullControl')
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
@@ -55,7 +55,7 @@ pipeline {
           }
           steps {
             withAWS(region: 'eu-west-2', credentials: '36b93a18-1bb6-46cd-b0a3-d43e5b8c880b') {
-              s3Delete(bucket: 'zero2hero-s3-bucket', path: '/sample-node-app/*')
+              s3Delete(bucket: 'zero2hero-s3-bucket2', path: '/sample-node-app/*')
             }
 
             mail(subject: 'Production Build', body: 'New Deployment to Production', to: 'alper.atay@gmail.com')
