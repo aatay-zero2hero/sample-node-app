@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    environment {
+        VERSION         = "${env.BUILD_NUMBER}";  //Change this to your build version
+        SCANNER_HOME    = tool 'SONAR-SCANNER';
+        SLACK_CHANNEL   = '#sonar-testing'     //change this to your squad slack channel
+    }
+    options {
+        buildDiscarder(logRotator(
+            artifactDaysToKeepStr: '',
+            artifactNumToKeepStr: '5',
+            daysToKeepStr: '60',
+            numToKeepStr: '10')
+        )
+        disableConcurrentBuilds()
+        disableResume()
+        timeout(time: 15, unit: 'MINUTES')
+    }
+    stages {
+        stage('Sonar Analysis'){
+            steps {
+                // Send notification of Jenkins hosted scan starting to Default Slack Channel.
+                // Commented out 09/09/20 by RM to reduce messages in slack channel, but commands left incase people want to change channel.
+                // slackSend (channel: '#sonarcloud-scans', color:'#FFFFFF', message: "### ${env.JOB_NAME} ###\n Status: Scan Starting (Branch: ${env.GIT_BRANCH}, Jenkins Job: ${env.BUILD_NUMBER})")
+                withSonarQubeEnv('Primetime SonarQube Server') 
+                {
+                    // sh "${SCANNER_HOME}/bin/sonar-scanner -X -Dproject.settings=./sonar-project.properties -Dsonar.projectVersion=${VERSION}"
+                    sh "./gradlew sonarqube"
+                }
+            }
+        }   
+    }
+    post {
+           success {
+                // Send success notification of Jenkins hosted scan starting to Default Slack Channel
+                slackSend (channel: "${SLACK_CHANNEL}",color:'#64c473', message: "### ${env.JOB_NAME} ###\n Status: Scan Completed (Branch: ${env.GIT_BRANCH}, Jenkins Job: ${env.BUILD_NUMBER})")
+           }
+           failure {
+                // Send failure notification of Jenkins hosted scan starting to Default Slack Channel
+                slackSend (channel: "${SLACK_CHANNEL}",color:'#ff0000', message: "### ${env.JOB_NAME} ###\n Status: Scan Failed (Branch: ${env.GIT_BRANCH}, Jenkins Job: ${env.BUILD_NUMBER})")
+           }
+      }
+    }
